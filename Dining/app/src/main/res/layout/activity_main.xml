@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.primepc.dining.MainActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
+        android:layout_above="@+id/id2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="86dp"
+        android:background="@android:color/holo_orange_dark" />
+    <EditText
+        android:id="@+id/id"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="189dp"
+        android:text="USER ID" />
+
+    <EditText
+        android:id="@+id/id2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignLeft="@+id/id"
+        android:layout_alignStart="@+id/id"
+        android:layout_below="@+id/id"
+        android:inputType="textPassword"
+        android:text="PASSWORD" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="Login"
+        android:id="@+id/button2"
+        android:onClick="menu_login"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="22dp"
+        android:background="@android:color/holo_orange_dark" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:text="LOG IN"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:background="@color/heads"/>
+
+</RelativeLayout>
