@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "988768803638",
+    "firebase_url": "https://dining-2c562.firebaseio.com",
+    "project_id": "dining-2c562",
+    "storage_bucket": "dining-2c562.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988768803638:android:5dd5e942eeb6099e",
+        "android_client_info": {
+          "package_name": "com.example.prime.dining"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988768803638-8j0rj2qh9uvi9euvrl1lm3khc0hd61om.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKZgQtuCT0HkwS6DAZ2jFDwQqX8N7gbj8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988768803638:android:1f37c80ac78add1b",
+        "android_client_info": {
+          "package_name": "com.example.primepc.dining"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988768803638-pkk0oq4v0ujq1codnrcvqhdafv3ap435.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.primepc.dining",
+            "certificate_hash": "111dd77a6ac5f204dd0839c482dea75950935cb5"
+          }
+        },
+        {
+          "client_id": "988768803638-8j0rj2qh9uvi9euvrl1lm3khc0hd61om.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKZgQtuCT0HkwS6DAZ2jFDwQqX8N7gbj8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988768803638-8j0rj2qh9uvi9euvrl1lm3khc0hd61om.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
