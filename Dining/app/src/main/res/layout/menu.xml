@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,11 +10,11 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="Menu"
+        android:background="@color/heads"
+        android:text="Welcome to Dining "
         android:textAlignment="center"
         tools:layout_editor_absoluteX="122dp"
         tools:layout_editor_absoluteY="16dp"
-        android:background="@color/heads"
 
         />
 
@@ -21,23 +22,20 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="44dp"
         android:text="Annoucements:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="10pt"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_alignParentLeft="true" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true">
 
 
     </LinearLayout>
@@ -52,7 +50,7 @@
         android:background="@android:color/holo_orange_dark" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/home_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -61,15 +59,15 @@
         android:text="Home" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/order_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button"
+        android:layout_alignTop="@+id/home_button"
         android:layout_centerHorizontal="true"
         android:text="Order" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/seating_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -79,11 +77,44 @@
 
     <TextView
         android:id="@+id/message1"
-        android:layout_width="wrap_content"
+        android:layout_width="211dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView4"
-        android:layout_toEndOf="@+id/button"
-        android:layout_toRightOf="@+id/button"
+        android:layout_toEndOf="@+id/home_button"
+        android:layout_toRightOf="@+id/home_button"
         android:text="first_message"
         android:textSize="10pt" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="327dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="207dp"
+        android:text="Typical Activity: Monday"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="10pt"
+        android:layout_alignParentLeft="true" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_marginTop="29dp"
+        android:layout_alignParentLeft="true">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/typicalactivity"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:ignore="MissingConstraints" />
+    </android.support.constraint.ConstraintLayout>
+
+
 </RelativeLayout>
