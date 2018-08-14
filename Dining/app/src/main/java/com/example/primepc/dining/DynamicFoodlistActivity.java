@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class DynamicFoodlistActivity extends AppCompatActivity {
 
-    ArrayList<String> dishes = new ArrayList<>();
-    ArrayList<String> prices = new ArrayList<>();
-    ArrayList<String> cart = new ArrayList<>();
+    static ArrayList<String> dishes = new ArrayList<>();
+    static ArrayList<String> prices = new ArrayList<>();
+    static ArrayList<String> cart = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
