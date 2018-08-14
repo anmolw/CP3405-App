@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.HttpAuthHandler;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -15,26 +13,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class indianfood_list extends AppCompatActivity {
+public class FoodlistActivity extends AppCompatActivity {
 
-    static ArrayList<String> dishes = new ArrayList<String>();
-    static ArrayList<String> prices = new ArrayList<String>();
+    ArrayList<String> restaurants = new ArrayList<>();
+    ArrayList<String> thumbnails = new ArrayList<>();
     static String data;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_indianfood_list);
+        setContentView(R.layout.activity_foodlist);
 
         fetchData fd = new fetchData();
         fd.execute();
@@ -47,9 +44,13 @@ public class indianfood_list extends AppCompatActivity {
         }
         parseData();
 
-        ListView restarauntList = findViewById(R.id.food_list);
+        System.out.println("Updating List");
+        ListView restaurantList = findViewById(R.id.food_list);
 
-        ArrayAdapter<String> adapter;
+        CustomAdapter restaurantAdapter = new CustomAdapter();
+
+        restaurantList.setAdapter(restaurantAdapter);
+
 
         Button homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -85,17 +86,17 @@ public class indianfood_list extends AppCompatActivity {
     }
 
     private void parseData() {
+        System.out.println("Parsing JSON");
         try {
             System.out.println(data);
 
-            JSONArray jArray = new JSONArray(data);
-            JSONObject jb = jArray.getJSONObject(1); // index 1 - indian food
-            JSONArray indianRestaurant = jb.getJSONArray("items");
-            for (int y = 0; y < indianRestaurant.length(); y++) {
-                JSONObject indianFood = indianRestaurant.getJSONObject(y);
-                dishes.add(indianFood.getString("name"));
-                prices.add(indianFood.getString("price"));
+            JSONArray restaurantArray = new JSONArray(data);
+            for (int i = 0; i < restaurantArray.length(); i++) {
+                JSONObject restaurant = restaurantArray.getJSONObject(i);
+                restaurants.add(restaurant.getString("name"));
+                thumbnails.add(restaurant.getString("thumbnail"));
             }
+            System.out.println("Parsing Done");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -107,7 +108,7 @@ public class indianfood_list extends AppCompatActivity {
     }
 
     private void openIndianFoodActivity() {
-        Intent intent = new Intent(this, indianfood_list.class);
+        Intent intent = new Intent(this, FoodlistActivity.class);
         startActivity(intent);
     }
 
@@ -121,11 +122,11 @@ public class indianfood_list extends AppCompatActivity {
         startActivity(intent);
     }
 
-    class CustomAdapter extends BaseAdapter{
+    class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return dishes.size();
+            return restaurants.size();
         }
 
         @Override
@@ -140,13 +141,15 @@ public class indianfood_list extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.custom_layout,null);
+            view = getLayoutInflater().inflate(R.layout.restaurant_layout, null);
 
             ImageView imageView = view.findViewById(R.id.imageView);
-            TextView textView_name = view.findViewById(R.id.textView_name);
-            TextView textView_description = view.findViewById(R.id.textView_description);
+            Button button_name = view.findViewById(R.id.button_name);
 
-            return null;
+            Picasso.get().load(thumbnails.get(i)).into(imageView);
+            button_name.setText(restaurants.get(i));
+
+            return view;
         }
     }
 }

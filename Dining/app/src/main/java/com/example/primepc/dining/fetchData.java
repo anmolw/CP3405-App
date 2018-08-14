@@ -2,11 +2,6 @@ package com.example.primepc.dining;
 
 import android.os.AsyncTask;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +27,7 @@ public class fetchData extends AsyncTask<Void,Void,Void> {
             while ((line = br.readLine())!=null){
                 sb.append(line);
             }
-            indianfood_list.data = sb.toString();
+            FoodlistActivity.data = sb.toString();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

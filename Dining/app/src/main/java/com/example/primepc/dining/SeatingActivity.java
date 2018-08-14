@@ -44,7 +44,7 @@ public class SeatingActivity extends AppCompatActivity {
     }
 
     private void openIndianFoodActivity() {
-        Intent intent = new Intent(this, indianfood_list.class);
+        Intent intent = new Intent(this, FoodlistActivity.class);
         startActivity(intent);
     }
 
