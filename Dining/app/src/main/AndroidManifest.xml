@@ -31,7 +31,7 @@
         </activity>
         <activity android:name=".MenuActivity" />
         <activity android:name=".RestaurantsActivity" />
-        <activity android:name=".order_cart" />
+        <activity android:name=".CartActivity" />
         <activity android:name=".SeatingActivity" />
         <activity android:name=".DynamicFoodlistActivity"></activity>
     </application>

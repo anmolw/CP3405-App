@@ -42,11 +42,8 @@ public class RestaurantsActivity extends AppCompatActivity {
         }
         parseData();
 
-        System.out.println("Updating List");
         ListView restaurantList = findViewById(R.id.restaurant_list);
-
         CustomAdapter restaurantAdapter = new CustomAdapter();
-
         restaurantList.setAdapter(restaurantAdapter);
 
 
@@ -73,18 +70,9 @@ public class RestaurantsActivity extends AppCompatActivity {
                 openSeatingActivity();
             }
         });
-
-        Button placeOrderButton = findViewById(R.id.place_order);
-        placeOrderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openOrderCartActivity();
-            }
-        });
     }
 
     private void parseData() {
-        System.out.println("Parsing JSON");
         try {
             System.out.println(data);
 
@@ -94,7 +82,6 @@ public class RestaurantsActivity extends AppCompatActivity {
                 restaurants.add(restaurant.getString("name"));
                 thumbnails.add(restaurant.getString("thumbnail"));
             }
-            System.out.println("Parsing Done");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -117,11 +104,6 @@ public class RestaurantsActivity extends AppCompatActivity {
 
     private void openDynamicFoodlistActivity(){
         Intent intent = new Intent(this,DynamicFoodlistActivity.class);
-        startActivity(intent);
-    }
-
-    private void openOrderCartActivity() {
-        Intent intent = new Intent(this, order_cart.class);
         startActivity(intent);
     }
 
