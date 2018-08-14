@@ -45,7 +45,7 @@ public class order_cart extends AppCompatActivity {
     }
 
     private void openIndianFoodActivity() {
-        Intent intent = new Intent(this, FoodlistActivity.class);
+        Intent intent = new Intent(this, RestaurantsActivity.class);
         startActivity(intent);
     }
 

@@ -25,7 +25,7 @@ public class SeatingActivity extends AppCompatActivity {
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openIndianFoodActivity();
+                openRestaurantsActivity();
             }
         });
 
@@ -43,8 +43,8 @@ public class SeatingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openIndianFoodActivity() {
-        Intent intent = new Intent(this, FoodlistActivity.class);
+    private void openRestaurantsActivity() {
+        Intent intent = new Intent(this, RestaurantsActivity.class);
         startActivity(intent);
     }
 
