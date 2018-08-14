@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class indianfood_list extends AppCompatActivity {
+public class SeatingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_indianfood_list);
+        setContentView(R.layout.activity_seating);
 
         Button homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -36,17 +36,7 @@ public class indianfood_list extends AppCompatActivity {
                 openSeatingActivity();
             }
         });
-
-        Button placeOrderButton = findViewById(R.id.place_order);
-        placeOrderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openOrderCartActivity();
-            }
-        });
     }
-
-
 
     private void openMenuActivity() {
         Intent intent = new Intent(this,MenuActivity.class);
@@ -60,11 +50,6 @@ public class indianfood_list extends AppCompatActivity {
 
     private void openSeatingActivity() {
         Intent intent = new Intent(this,SeatingActivity.class);
-        startActivity(intent);
-    }
-
-    private void openOrderCartActivity() {
-        Intent intent = new Intent(this, order_cart.class);
         startActivity(intent);
     }
 }
