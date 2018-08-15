@@ -33,7 +33,7 @@ public class FoodlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodlist);
 
-        fetchData fd = new fetchData();
+        FetchData fd = new FetchData();
         fd.execute();
 
 
