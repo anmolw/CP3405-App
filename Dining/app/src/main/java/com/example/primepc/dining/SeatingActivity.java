@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class SeatingActivity extends AppCompatActivity {
 
@@ -13,7 +14,7 @@ public class SeatingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seating);
 
-        Button homeButton = findViewById(R.id.home_button);
+        ImageButton homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -21,7 +22,7 @@ public class SeatingActivity extends AppCompatActivity {
             }
         });
 
-        Button orderButton = findViewById(R.id.order_button);
+        ImageButton orderButton = findViewById(R.id.order_button);
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,7 +30,7 @@ public class SeatingActivity extends AppCompatActivity {
             }
         });
 
-        Button seatingButton = findViewById(R.id.seating_button);
+        ImageButton seatingButton = findViewById(R.id.seating_button);
         seatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
