@@ -44,8 +44,19 @@ public class CartActivity extends AppCompatActivity {
                 openSeatingActivity();
             }
         });
-    }
 
+        Button place_order= findViewById(R.id.place_order);
+        place_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                placeCartOrder();
+            }
+        });
+    }
+    private void placeCartOrder(){
+        Intent intent = new Intent(this,SeatMap.class);
+        startActivity(intent);
+    }
 
     private void openMenuActivity() {
         Intent intent = new Intent(this,MenuActivity.class);

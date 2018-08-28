@@ -33,7 +33,8 @@
         <activity android:name=".RestaurantsActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".SeatingActivity" />
-        <activity android:name=".DynamicFoodlistActivity"></activity>
+        <activity android:name=".DynamicFoodlistActivity" />
+        <activity android:name=".SeatMap"></activity>
     </application>
 
 </manifest>
