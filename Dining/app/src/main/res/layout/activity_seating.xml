@@ -351,7 +351,6 @@
         android:layout_alignBaseline="@+id/button16"
         android:layout_alignEnd="@+id/button7"
         android:layout_alignRight="@+id/button7"
-        android:text="is"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small" />
 
     <TextView
