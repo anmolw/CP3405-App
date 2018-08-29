@@ -34,7 +34,8 @@
         <activity android:name=".CartActivity" />
         <activity android:name=".SeatingActivity" />
         <activity android:name=".DynamicFoodlistActivity" />
-        <activity android:name=".SeatMap"></activity>
+        <activity android:name=".SeatMap" />
+        <activity android:name=".MapRenderTest" />
     </application>
 
 </manifest>

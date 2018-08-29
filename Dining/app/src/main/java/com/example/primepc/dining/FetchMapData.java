@@ -22,8 +22,9 @@ public class FetchMapData extends AsyncTask<Void,Void,Void> {
     String singleParsed;
     int id;
     int seats_available;
-    boolean AC;
+    boolean ac=true;
     ArrayList<Integer> table;
+
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -38,33 +39,21 @@ public class FetchMapData extends AsyncTask<Void,Void,Void> {
             while (line != null){
                 line = bufferedReader.readLine();
                 data = data + line ;
-                
-                
+
             }
-
-
-
-
-
-
             JSONArray JA=new JSONArray(data);
             /**
             for (Integer integer : table = new ArrayList<Integer>()) {
              table.add(id);
             }
              */
-            for(int i=1;i<JA.length();i++){
-                JSONObject JO=(JSONObject) JA.get(i);
-                dataParsed = "Table no:"+ JO.getInt("id")+ "\n"+
-                                "Seats Available"+ JO.getInt("seats_available")+ "\n"+
-                                "AC:"+ JO.getBoolean("AC")+"\n";
+            for(int id=1;id<JA.length();id++) {
+
+                    JSONObject JO = (JSONObject) JA.get(id);
+                    dataParsed = "Table no:" + JO.getInt("id") + "\n" +
+                            "Seats Available" + JO.getInt("seats_available") + "\n" +
+                            "AC:" + JO.getBoolean("AC") + "\n";
             }
-
-
-
-
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
