@@ -2,6 +2,7 @@ package com.example.primepc.dining;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -206,52 +207,196 @@ public class SeatingActivity extends AppCompatActivity {
                 switch (Integer.parseInt(value)) {
                     case 1:  Button button = findViewById(R.id.seat01);
                         button.setText((String.valueOf(seat_count))+"/4");
+                        if(seat_count<2){
+                            button.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 2:  Button button2 = findViewById(R.id.seat02);
                         button2.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button2.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button2.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button2.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 3:  Button button3 = findViewById(R.id.seat03);
                         button3.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button3.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button3.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button3.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 4: Button button4 = findViewById(R.id.seat04);
                         button4.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button4.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button4.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button4.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 5:  Button button5 = findViewById(R.id.seat05);
                         button5.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button5.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button5.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button5.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 6:  Button button6 = findViewById(R.id.seat06);
                         button6.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button6.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button6.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button6.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 7: Button button7 = findViewById(R.id.seat07);
                         button7.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button7.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button7.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button7.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 8:  Button button8 = findViewById(R.id.seat08);
                         button8.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button8.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button8.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button8.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 9:  Button button9 = findViewById(R.id.seat09);
                         button9.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button9.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button9.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button9.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 10: Button button10 = findViewById(R.id.seat10);
                         button10.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button10.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button10.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button10.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 11: Button button11 = findViewById(R.id.seat11);
                         button11.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button11.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button11.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button11.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 12:Button button12 = findViewById(R.id.seat12);
                         button12.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button12.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button12.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button12.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 13: Button button13 = findViewById(R.id.seat13);
                         button13.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button13.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button13.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button13.setBackgroundColor(Color.RED);
+                        }
                         break;
 
                     case 14: Button button14 = findViewById(R.id.seat14);
                         button14.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button14.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button14.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button14.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 15: Button button15 = findViewById(R.id.seat15);
                         button15.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button15.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button15.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button15.setBackgroundColor(Color.RED);
+                        }
                         break;
                     case 16: Button button16 = findViewById(R.id.seat16);
                         button16.setText((Integer.toString(seat_count))+"/4");
+                        if(seat_count<2){
+                            button16.setBackgroundColor(Color.GREEN);
+                        }
+                        else if(seat_count>2 && seat_count<4){
+                            button16.setBackgroundColor(getResources().getColor(R.color.orange));
+                        }
+                        else {
+                            button16.setBackgroundColor(Color.RED);
+                        }
                         break;
 
                     default:
