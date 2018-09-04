@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject=new JSONObject(response);
-                            if(jsonObject.names().equals("token")){
+                            if(jsonObject.has("token")){
                                 Toast.makeText(getApplicationContext(),"token" + jsonObject.getString("token"),Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(),MenuActivity.class));
                         }else{
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         HashMap<String,String> hashMap=new HashMap<String, String>();
-                        hashMap.put("id",id.getText().toString());
-                        hashMap.put("id2",id2.getText().toString());
+                        hashMap.put("username",id.getText().toString());
+                        hashMap.put("password",id2.getText().toString());
                         return hashMap;
                     }
                 };
