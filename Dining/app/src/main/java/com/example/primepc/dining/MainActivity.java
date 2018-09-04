@@ -53,9 +53,12 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObject=new JSONObject(response);
                             if(jsonObject.has("token")){
                                 Toast.makeText(getApplicationContext(),"token" + jsonObject.getString("token"),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,"Successful login",Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(),MenuActivity.class));
                         }else{
+                                Toast.makeText(MainActivity.this,"Invalid credentials,Please try again",Toast.LENGTH_LONG).show();
                                 Toast.makeText(getApplicationContext(),"Error"+jsonObject.getString("error"),Toast.LENGTH_SHORT).show();
+                            //    Toast.makeText(MainActivity.this,"Invalid credentials,Please try again",Toast.LENGTH_LONG).show();
 
                             }
                         } catch (JSONException e) {
@@ -66,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     }, new ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this,"Invalid credentials,Please try again",Toast.LENGTH_LONG).show();
 
                     }
                 }){
