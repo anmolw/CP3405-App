@@ -27,7 +27,7 @@ public class SeatingActivity extends AppCompatActivity {
 
 
     // URL to get contacts JSON
-    private static String url = "https://anmolw.com/tables.json";
+    private static String url ="https://dt.anmolw.com/api/tables";
 
     ArrayList<HashMap<String, String>> SeatList;
 
