@@ -36,6 +36,7 @@
         <activity android:name=".DynamicFoodlistActivity" />
         <activity android:name=".SeatMap" />
         <activity android:name=".MapRenderTest" />
+        <activity android:name=".OrderReceipt"></activity>
     </application>
 
 </manifest>

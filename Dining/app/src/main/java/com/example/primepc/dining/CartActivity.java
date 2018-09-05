@@ -9,8 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 public class CartActivity extends AppCompatActivity {
+    CustomAdapter cartAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         ListView cartList = findViewById(R.id.cart_list);
-        CustomAdapter cartAdapter = new CustomAdapter();
+        cartAdapter = new CustomAdapter();
         cartList.setAdapter(cartAdapter);
 
         Button homeButton = findViewById(R.id.home_button);
@@ -49,11 +49,13 @@ public class CartActivity extends AppCompatActivity {
         place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println(DynamicFoodlistActivity.cart.get(0));
                 placeCartOrder();
             }
         });
     }
     private void placeCartOrder(){
+        System.out.print(cartAdapter);
         Intent intent = new Intent(this,SeatMap.class);
         startActivity(intent);
     }
