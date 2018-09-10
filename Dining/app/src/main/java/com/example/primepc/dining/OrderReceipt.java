@@ -1,10 +1,12 @@
 package com.example.primepc.dining;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,8 +33,25 @@ public class OrderReceipt extends AppCompatActivity {
         TextView textView = findViewById(R.id.tablenum);
         textView.setText("YOUR SEAT NO : "+message);
 
-    }
+        Button button = findViewById(R.id.home_bbutton);
+        button.setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View view) {
+
+                callMenu();
+
+
+            }
+        });
+
+    }
+    private void callMenu(){
+        Intent intent = new Intent(this,MenuActivity.class);
+        Intent get = getIntent();
+        finish();
+        startActivity(intent);
+
+    }
     class CustomAdap extends BaseAdapter {
 
         @Override

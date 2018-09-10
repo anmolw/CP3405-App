@@ -45,7 +45,7 @@ public class SeatingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seating);
 
-        ImageButton homeButton = findViewById(R.id.home_button);
+        Button homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +53,7 @@ public class SeatingActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton orderButton = findViewById(R.id.order_button);
+        Button orderButton = findViewById(R.id.order_button);
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +61,7 @@ public class SeatingActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton seatingButton = findViewById(R.id.seating_button);
+        Button seatingButton = findViewById(R.id.seating_button);
         seatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
