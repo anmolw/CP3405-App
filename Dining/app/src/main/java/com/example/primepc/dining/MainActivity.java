@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private StringRequest request;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         id = (EditText) findViewById(R.id.id);
         id2 = (EditText) findViewById(R.id.id2);
-        button2=(Button)findViewById(R.id.button2);
+        button2=(Button)findViewById(   R.id.button2);
 
         requestQueue = Volley.newRequestQueue(this);
         button2.setOnClickListener(new View.OnClickListener() {
