@@ -10,11 +10,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class DynamicFoodlistActivity extends AppCompatActivity {
@@ -96,7 +91,6 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
 
     private void openOrderCartActivity() {
         Intent intent = new Intent(this, CartActivity.class);
-        System.out.println(cart);
         startActivity(intent);
     }
 

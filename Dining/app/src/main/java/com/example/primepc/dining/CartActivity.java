@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 public class CartActivity extends AppCompatActivity {
     CustomAdapter cartAdapter;
 
@@ -57,6 +58,8 @@ public class CartActivity extends AppCompatActivity {
     private void placeCartOrder(){
         System.out.print(cartAdapter);
         Intent intent = new Intent(this,SeatMap.class);
+        PostOrder po = new PostOrder();
+        po.countItems();
         startActivity(intent);
     }
 
