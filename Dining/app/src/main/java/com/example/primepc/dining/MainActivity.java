@@ -1,6 +1,7 @@
 package com.example.primepc.dining;
 
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText id,id2;
     private Button button2;
     private RequestQueue requestQueue;
-    private static final String URL="https://dt.anmolw.com/api/login";
+    private static final String URL= "https://dt.anmolw.com/api/login";
     private StringRequest request;
+    public static String token = "cf9418ad846dd0e4bbdfc6ee4b";
 
 
 
@@ -56,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"token" + jsonObject.getString("token"),Toast.LENGTH_SHORT).show();
                                 Toast.makeText(MainActivity.this,"Successful login",Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(),MenuActivity.class));
-                        }else{
+
+                            }else{
                                 Toast.makeText(MainActivity.this,"Invalid credentials,Please try again",Toast.LENGTH_LONG).show();
                                 Toast.makeText(getApplicationContext(),"Error"+jsonObject.getString("error"),Toast.LENGTH_SHORT).show();
-                            //    Toast.makeText(MainActivity.this,"Invalid credentials,Please try again",Toast.LENGTH_LONG).show();
+
 
                             }
                         } catch (JSONException e) {
