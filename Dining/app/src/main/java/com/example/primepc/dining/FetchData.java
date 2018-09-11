@@ -14,7 +14,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class FetchData extends AsyncTask<Void,Void,Void> {
 
-
     @Override
     protected Void doInBackground(Void... voids) {
         HttpsURLConnection connection;
