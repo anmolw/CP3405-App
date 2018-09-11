@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
     public void menu_login(View view){
 
         Intent myIntent = new Intent(this, MenuActivity.class);
+        myIntent.putExtra("token",token);
         this.startActivity(myIntent);
     }
 }
