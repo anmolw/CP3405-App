@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         HashMap<String,String> hashMap=new HashMap<String, String>();
                         hashMap.put("username",id.getText().toString());
                         hashMap.put("password",id2.getText().toString());
-                        hashMap.put("token",token);
+                      
 
 
 
