@@ -6,37 +6,53 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
+
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 
 public class SeatMap extends AppCompatActivity {
+
+    private StringRequest request;
+    public static String token;
 
     private String TAG = MainActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
 
 
+    public RequestQueue requestQueue;
+
+
     // URL to get contacts JSON
-    private static String url ="https://dt.anmolw.com/api/tables";
+    private static String url = "https://dt.anmolw.com/api/tables";
 
     ArrayList<HashMap<String, String>> SeatList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
 
         SeatList = new ArrayList<>();
@@ -48,7 +64,7 @@ public class SeatMap extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seating);
 
-        ImageButton homeButton = findViewById(R.id.home_button);
+        Button homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +72,7 @@ public class SeatMap extends AppCompatActivity {
             }
         });
 
-        ImageButton orderButton = findViewById(R.id.order_button);
+        Button orderButton = findViewById(R.id.order_button);
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +80,7 @@ public class SeatMap extends AppCompatActivity {
             }
         });
 
-        ImageButton seatingButton = findViewById(R.id.seating_button);
+        Button seatingButton = findViewById(R.id.seating_button);
         seatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +90,7 @@ public class SeatMap extends AppCompatActivity {
     }
 
     private void openMenuActivity() {
-        Intent intent = new Intent(this,MenuActivity.class);
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
@@ -84,7 +100,7 @@ public class SeatMap extends AppCompatActivity {
     }
 
     private void openSeatingActivity() {
-        Intent intent = new Intent(this,SeatingActivity.class);
+        Intent intent = new Intent(this, SeatingActivity.class);
         startActivity(intent);
     }
 
@@ -123,8 +139,6 @@ public class SeatMap extends AppCompatActivity {
                         String id = c.getString("id");
                         String seat = c.getString("seats_available");
                         String hall = c.getString("AC");
-
-
 
 
                         // tmp hash map for single contact
@@ -180,321 +194,284 @@ public class SeatMap extends AppCompatActivity {
             System.out.println("I come here !");
 
 
-
-
             for (final HashMap<String, String> entry : SeatList) {
-                System.out.println(entry.get("id"));
 
                 String seats = entry.get("seats_available");
                 int seat_count = 0;
-                if(Integer.parseInt(seats) == 0){
-                    seat_count=4;
-                }
-                else if(Integer.parseInt(seats) == 1){
-                    seat_count=3;
+                if (Integer.parseInt(seats) == 0) {
+                    seat_count = 4;
+                } else if (Integer.parseInt(seats) == 1) {
+                    seat_count = 3;
 
-                }else if(Integer.parseInt(seats) == 2){
-                    seat_count=2;
+                } else if (Integer.parseInt(seats) == 2) {
+                    seat_count = 2;
 
-                }else if(Integer.parseInt(seats) == 3){
-                    seat_count=1;
+                } else if (Integer.parseInt(seats) == 3) {
+                    seat_count = 1;
 
-                }
-                else if(Integer.parseInt(seats) == 4){
-                    seat_count=0;
+                } else if (Integer.parseInt(seats) == 4) {
+                    seat_count = 0;
 
                 }
 
 
                 String value = entry.get("id");
                 switch (Integer.parseInt(value)) {
-                    case 1:  Button button = findViewById(R.id.seat01);
-                        button.setText((String.valueOf(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 1:
+                        Button button = findViewById(R.id.seat01);
+                        button.setText((String.valueOf(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button.setBackgroundColor(Color.RED);
                         }
 
                         button.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 2:  Button button2 = findViewById(R.id.seat02);
-                        button2.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 2:
+                        Button button2 = findViewById(R.id.seat02);
+                        button2.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button2.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button2.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button2.setBackgroundColor(Color.RED);
                         }
                         button2.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
 
                         break;
-                    case 3:  Button button3 = findViewById(R.id.seat03);
-                        button3.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 3:
+                        Button button3 = findViewById(R.id.seat03);
+                        button3.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button3.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button3.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button3.setBackgroundColor(Color.RED);
                         }
                         button3.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 4: Button button4 = findViewById(R.id.seat04);
-                        button4.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 4:
+                        Button button4 = findViewById(R.id.seat04);
+                        button4.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button4.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button4.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button4.setBackgroundColor(Color.RED);
                         }
                         button4.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 5:  Button button5 = findViewById(R.id.seat05);
-                        button5.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 5:
+                        Button button5 = findViewById(R.id.seat05);
+                        button5.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button5.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button5.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button5.setBackgroundColor(Color.RED);
                         }
                         button5.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 6:  Button button6 = findViewById(R.id.seat06);
-                        button6.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 6:
+                        Button button6 = findViewById(R.id.seat06);
+                        button6.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button6.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button6.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button6.setBackgroundColor(Color.RED);
                         }
                         button6.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 7: Button button7 = findViewById(R.id.seat07);
-                        button7.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 7:
+                        Button button7 = findViewById(R.id.seat07);
+                        button7.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button7.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button7.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button7.setBackgroundColor(Color.RED);
                         }
                         button7.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 8:  Button button8 = findViewById(R.id.seat08);
-                        button8.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 8:
+                        Button button8 = findViewById(R.id.seat08);
+                        button8.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button8.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button8.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button8.setBackgroundColor(Color.RED);
                         }
                         button8.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 9:  Button button9 = findViewById(R.id.seat09);
-                        button9.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 9:
+                        Button button9 = findViewById(R.id.seat09);
+                        button9.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button9.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button9.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button9.setBackgroundColor(Color.RED);
                         }
                         button9.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 10: Button button10 = findViewById(R.id.seat10);
-                        button10.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 10:
+                        Button button10 = findViewById(R.id.seat10);
+                        button10.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button10.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button10.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button10.setBackgroundColor(Color.RED);
                         }
                         button10.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 11: Button button11 = findViewById(R.id.seat11);
-                        button11.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 11:
+                        Button button11 = findViewById(R.id.seat11);
+                        button11.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button11.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button11.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button11.setBackgroundColor(Color.RED);
                         }
                         button11.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 12:Button button12 = findViewById(R.id.seat12);
-                        button12.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 12:
+                        Button button12 = findViewById(R.id.seat12);
+                        button12.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button12.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button12.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button12.setBackgroundColor(Color.RED);
                         }
                         button12.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 13: Button button13 = findViewById(R.id.seat13);
-                        button13.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 13:
+                        Button button13 = findViewById(R.id.seat13);
+                        button13.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button13.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button13.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button13.setBackgroundColor(Color.RED);
                         }
                         button13.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
 
-                    case 14: Button button14 = findViewById(R.id.seat14);
-                        button14.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 14:
+                        Button button14 = findViewById(R.id.seat14);
+                        button14.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button14.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button14.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button14.setBackgroundColor(Color.RED);
                         }
                         button14.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 15: Button button15 = findViewById(R.id.seat15);
-                        button15.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 15:
+                        Button button15 = findViewById(R.id.seat15);
+                        button15.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button15.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button15.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button15.setBackgroundColor(Color.RED);
                         }
                         button15.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
                         break;
-                    case 16: Button button16 = findViewById(R.id.seat16);
-                        button16.setText((Integer.toString(seat_count))+"/4");
-                        if(seat_count<2){
+                    case 16:
+                        Button button16 = findViewById(R.id.seat16);
+                        button16.setText((Integer.toString(seat_count)) + "/4");
+                        if (seat_count < 2) {
                             button16.setBackgroundColor(Color.GREEN);
-                        }
-                        else if(seat_count>2 && seat_count<4){
+                        } else if (seat_count > 2 && seat_count < 4) {
                             button16.setBackgroundColor(getResources().getColor(R.color.orange));
-                        }
-                        else {
+                        } else {
                             button16.setBackgroundColor(Color.RED);
                         }
                         button16.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v)
-                            {
+                            public void onClick(View v) {
                                 OrderReceiptCall(entry.get("id"));
                             }
                         });
@@ -508,10 +485,59 @@ public class SeatMap extends AppCompatActivity {
         }
     }
 
-    private void OrderReceiptCall(String a){
+    private void OrderReceiptCall(String a) {
 
-        Intent intent = new Intent(this,OrderReceipt.class);
-        intent.putExtra("tablenumber",a);
+
+        final Intent intent = new Intent(this, OrderReceipt.class);
+        intent.putExtra("tablenumber", a);
+
+
+        String URL = "https://dt.anmolw.com/api/reservations";
+        requestQueue = Volley.newRequestQueue(this);
+
+
+        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.has("table")) {
+
+                        Toast.makeText(getApplicationContext(), "token" + jsonObject.getString("token"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SeatMap.this, "Successful login", Toast.LENGTH_LONG).show();
+                        token = jsonObject.getString("token");
+                        System.out.println(token + "yes i am it");
+                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+
+                    } else {
+                        Toast.makeText(SeatMap.this, "Invalid credentials,Please try again", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(SeatMap.this, "Invalid credentials,Please try again", Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("token", MainActivity.token);
+
+
+                return hashMap;
+            }
+        };
+        requestQueue.add(request);
         startActivity(intent);
-    }
-}
+
+    }}
+

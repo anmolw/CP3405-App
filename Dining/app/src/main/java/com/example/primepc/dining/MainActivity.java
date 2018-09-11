@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText id,id2;
     private Button button2;
     private RequestQueue requestQueue;
-    private static final String URL= "https://dt.anmolw.com/api/login";
+    static final String URL= "https://dt.anmolw.com/api/login";
     private StringRequest request;
     public static String token;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         id = (EditText) findViewById(R.id.id);
         id2 = (EditText) findViewById(R.id.id2);
-        button2=(Button)findViewById(   R.id.button2);
+        button2=(Button)findViewById(R.id.button2);
 
         requestQueue = Volley.newRequestQueue(this);
         button2.setOnClickListener(new View.OnClickListener() {
