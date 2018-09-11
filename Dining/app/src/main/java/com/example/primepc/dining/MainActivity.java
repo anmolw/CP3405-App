@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.session.MediaSession;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.json.JSONObject.*;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText id,id2;
@@ -32,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private static final String URL= "https://dt.anmolw.com/api/login";
     private StringRequest request;
-    public static String token = "cf9418ad846dd0e4bbdfc6ee4b";
-
+    public static String token;
 
 
     @Override
@@ -55,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject=new JSONObject(response);
                             if(jsonObject.has("token")){
+
                                 Toast.makeText(getApplicationContext(),"token" + jsonObject.getString("token"),Toast.LENGTH_SHORT).show();
                                 Toast.makeText(MainActivity.this,"Successful login",Toast.LENGTH_LONG).show();
+                                token = jsonObject.getString("token");
                                 startActivity(new Intent(getApplicationContext(),MenuActivity.class));
 
                             }else{
@@ -82,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
                         HashMap<String,String> hashMap=new HashMap<String, String>();
                         hashMap.put("username",id.getText().toString());
                         hashMap.put("password",id2.getText().toString());
+
+
+
                         return hashMap;
                     }
                 };
@@ -95,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
     public void menu_login(View view){
 
         Intent myIntent = new Intent(this, MenuActivity.class);
-
         this.startActivity(myIntent);
     }
 }
