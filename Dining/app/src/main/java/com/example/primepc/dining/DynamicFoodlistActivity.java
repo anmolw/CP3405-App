@@ -19,19 +19,18 @@ import java.util.ArrayList;
 
 public class DynamicFoodlistActivity extends AppCompatActivity {
 
-    static ArrayList<String> dishes = new ArrayList<>();
-    static ArrayList<String> prices = new ArrayList<>();
-    static ArrayList<String> cart = new ArrayList<>();
+    static ArrayList<Item> cart = new ArrayList<>();
+    Restaurant chosenRestaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic_foodlist);
 
-        TextView title = findViewById(R.id.restaurant);
-        title.setText(RestaurantsActivity.chosenRestaurant);
+        findRestaurantById();
 
-        parseData();
+        TextView title = findViewById(R.id.restaurant);
+        title.setText(chosenRestaurant.getName());
 
         ListView foodList = findViewById(R.id.food_list);
         CustomAdapter foodAdapter = new CustomAdapter();
@@ -71,22 +70,12 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
         });
     }
 
-    private void parseData() {
-        try {
-            JSONArray restaurantArray = new JSONArray(RestaurantsActivity.data);
-            for (int i = 0; i < restaurantArray.length(); i++) {
-                JSONObject restaraunt = restaurantArray.getJSONObject(i);
-                if (restaraunt.getString("name").equals(RestaurantsActivity.chosenRestaurant)){
-                    JSONArray items = restaraunt.getJSONArray("items");
-                    for (int y = 0; y < items.length(); y++) {
-                        JSONObject indianFood = items.getJSONObject(y);
-                        dishes.add(indianFood.getString("name"));
-                        prices.add(indianFood.getString("price"));
-                    }
-                }
+    private void findRestaurantById(){
+        for (Restaurant restaurant:
+             RestaurantsActivity.restaurants) {
+            if (restaurant.getId() == RestaurantsActivity.chosenRestaurant){
+                chosenRestaurant = restaurant;
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
@@ -107,6 +96,7 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
 
     private void openOrderCartActivity() {
         Intent intent = new Intent(this, CartActivity.class);
+        System.out.println(cart);
         startActivity(intent);
     }
 
@@ -114,7 +104,7 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return dishes.size();
+            return chosenRestaurant.getItems().size();
         }
 
         @Override
@@ -132,15 +122,17 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.foodlist_layout, null);
 
             final TextView textView_name = view.findViewById(R.id.textView_name);
-            textView_name.setText(dishes.get(i));
+            textView_name.setText(chosenRestaurant.getItems().get(i).getName());
+
             TextView textView_description = view.findViewById(R.id.textView_description);
-            textView_description.setText(prices.get(i));
+            textView_description.setText(chosenRestaurant.getItems().get(i).getPrice());
             ImageButton imageButton = view.findViewById(R.id.imageButton);
+            imageButton.setTag(chosenRestaurant.getItems().get(i));
 
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cart.add((String) textView_name.getText());
+                    cart.add((Item)view.getTag());
                 }
             });
             return view;

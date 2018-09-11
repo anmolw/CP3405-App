@@ -48,7 +48,7 @@ public class SeatMap extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seating);
 
-        Button homeButton = findViewById(R.id.home_button);
+        ImageButton homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +56,7 @@ public class SeatMap extends AppCompatActivity {
             }
         });
 
-        Button orderButton = findViewById(R.id.order_button);
+        ImageButton orderButton = findViewById(R.id.order_button);
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +64,7 @@ public class SeatMap extends AppCompatActivity {
             }
         });
 
-        Button seatingButton = findViewById(R.id.seating_button);
+        ImageButton seatingButton = findViewById(R.id.seating_button);
         seatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

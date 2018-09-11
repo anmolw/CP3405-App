@@ -20,10 +20,9 @@ import java.util.ArrayList;
 
 public class RestaurantsActivity extends AppCompatActivity {
 
-    ArrayList<String> restaurants = new ArrayList<>();
-    ArrayList<String> thumbnails = new ArrayList<>();
+    static ArrayList<Restaurant> restaurants = new ArrayList<>();
     static String data;
-    static String chosenRestaurant;
+    static int chosenRestaurant;
 
 
     @Override
@@ -79,8 +78,13 @@ public class RestaurantsActivity extends AppCompatActivity {
             JSONArray restaurantArray = new JSONArray(data);
             for (int i = 0; i < restaurantArray.length(); i++) {
                 JSONObject restaurant = restaurantArray.getJSONObject(i);
-                restaurants.add(restaurant.getString("name"));
-                thumbnails.add(restaurant.getString("thumbnail"));
+                Restaurant temporaryRestaurant = new Restaurant(restaurant.getInt("id"), restaurant.getString("name"), restaurant.getString("thumbnail"));
+                JSONArray items = restaurant.getJSONArray("items");
+                for (int y = 0; y < items.length();y++){
+                    JSONObject item = items.getJSONObject(y);
+                    temporaryRestaurant.addItem(new Item(item.getInt("id"), item.getString("name"), item.getString("price")));
+                }
+                restaurants.add(temporaryRestaurant);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -133,13 +137,14 @@ public class RestaurantsActivity extends AppCompatActivity {
             button_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    chosenRestaurant = ((Button) view).getText().toString() ;
+                    chosenRestaurant = (int) view.getTag();
                     openDynamicFoodlistActivity();
                 }
             });
 
-            Picasso.get().load(thumbnails.get(i)).into(imageView);
-            button_name.setText(restaurants.get(i));
+            Picasso.get().load(restaurants.get(i).getThumbnail()).into(imageView);
+            button_name.setText(restaurants.get(i).getName());
+            button_name.setTag(restaurants.get(i).getId());
 
             return view;
         }

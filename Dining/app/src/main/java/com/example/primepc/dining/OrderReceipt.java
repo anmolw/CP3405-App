@@ -1,12 +1,10 @@
 package com.example.primepc.dining;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,25 +31,8 @@ public class OrderReceipt extends AppCompatActivity {
         TextView textView = findViewById(R.id.tablenum);
         textView.setText("YOUR SEAT NO : "+message);
 
-        Button button = findViewById(R.id.home_bbutton);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-
-                callMenu();
-
-
-            }
-        });
-
     }
-    private void callMenu(){
-        Intent intent = new Intent(this,MenuActivity.class);
-        Intent get = getIntent();
-        finish();
-        startActivity(intent);
 
-    }
     class CustomAdap extends BaseAdapter {
 
         @Override
@@ -74,9 +55,9 @@ public class OrderReceipt extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.cart_layout,null);
 
             TextView textView_name = view.findViewById(R.id.textView_name);
-            textView_name.setText(DynamicFoodlistActivity.cart.get(i));
+            textView_name.setText(DynamicFoodlistActivity.cart.get(i).getName());
             TextView textView_description = view.findViewById(R.id.textView_description);
-            textView_description.setText(DynamicFoodlistActivity.prices.get(DynamicFoodlistActivity.dishes.indexOf(DynamicFoodlistActivity.cart.get(i))));
+            textView_description.setText(DynamicFoodlistActivity.cart.get(i).getPrice());
 
             return view;
         }

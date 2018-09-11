@@ -90,13 +90,11 @@ public class MenuActivity extends AppCompatActivity{
 
     private void openMenuActivity() {
         Intent intent = new Intent(this,MenuActivity.class);
-
         startActivity(intent);
     }
 
     private void openRestaurantsActivity() {
         Intent intent = new Intent(this, RestaurantsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

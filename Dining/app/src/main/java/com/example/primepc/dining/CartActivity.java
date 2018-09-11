@@ -21,7 +21,6 @@ public class CartActivity extends AppCompatActivity {
         cartAdapter = new CustomAdapter();
         cartList.setAdapter(cartAdapter);
 
-
         Button homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,9 +97,9 @@ public class CartActivity extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.cart_layout,null);
 
             TextView textView_name = view.findViewById(R.id.textView_name);
-            textView_name.setText(DynamicFoodlistActivity.cart.get(i));
+            textView_name.setText(DynamicFoodlistActivity.cart.get(i).getName());
             TextView textView_description = view.findViewById(R.id.textView_description);
-            textView_description.setText(DynamicFoodlistActivity.prices.get(DynamicFoodlistActivity.dishes.indexOf(DynamicFoodlistActivity.cart.get(i))));
+            textView_description.setText(DynamicFoodlistActivity.cart.get(i).getPrice());
 
             return view;
         }
