@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class DynamicFoodlistActivity extends AppCompatActivity {
@@ -65,10 +66,10 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
         });
     }
 
-    private void findRestaurantById(){
-        for (Restaurant restaurant:
-             RestaurantsActivity.restaurants) {
-            if (restaurant.getId() == RestaurantsActivity.chosenRestaurant){
+    private void findRestaurantById() {
+        for (Restaurant restaurant :
+                RestaurantsActivity.restaurants) {
+            if (restaurant.getId() == RestaurantsActivity.chosenRestaurant) {
                 chosenRestaurant = restaurant;
             }
         }
@@ -94,7 +95,7 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    class CustomAdapter extends BaseAdapter{
+    class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -126,7 +127,7 @@ public class DynamicFoodlistActivity extends AppCompatActivity {
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cart.add((Item)view.getTag());
+                    cart.add((Item) view.getTag());
                 }
             });
             return view;

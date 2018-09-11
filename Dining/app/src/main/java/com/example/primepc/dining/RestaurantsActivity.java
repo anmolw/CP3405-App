@@ -73,14 +73,12 @@ public class RestaurantsActivity extends AppCompatActivity {
 
     private void parseData() {
         try {
-            System.out.println(data);
-
             JSONArray restaurantArray = new JSONArray(data);
             for (int i = 0; i < restaurantArray.length(); i++) {
                 JSONObject restaurant = restaurantArray.getJSONObject(i);
                 Restaurant temporaryRestaurant = new Restaurant(restaurant.getInt("id"), restaurant.getString("name"), restaurant.getString("thumbnail"));
                 JSONArray items = restaurant.getJSONArray("items");
-                for (int y = 0; y < items.length();y++){
+                for (int y = 0; y < items.length(); y++) {
                     JSONObject item = items.getJSONObject(y);
                     temporaryRestaurant.addItem(new Item(item.getInt("id"), item.getString("name"), item.getString("price")));
                 }
@@ -106,8 +104,8 @@ public class RestaurantsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openDynamicFoodlistActivity(){
-        Intent intent = new Intent(this,DynamicFoodlistActivity.class);
+    private void openDynamicFoodlistActivity() {
+        Intent intent = new Intent(this, DynamicFoodlistActivity.class);
         startActivity(intent);
     }
 

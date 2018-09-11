@@ -31,7 +31,7 @@ public class Restaurant {
         return items;
     }
 
-    void addItem (Item item){
+    void addItem(Item item) {
         items.add(item);
     }
 }

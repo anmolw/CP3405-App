@@ -46,25 +46,24 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-        Button place_order= findViewById(R.id.place_order);
+        Button place_order = findViewById(R.id.place_order);
         place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(DynamicFoodlistActivity.cart.get(0));
                 placeCartOrder();
             }
         });
     }
-    private void placeCartOrder(){
-        System.out.print(cartAdapter);
-        Intent intent = new Intent(this,SeatMap.class);
+
+    private void placeCartOrder() {
+        Intent intent = new Intent(this, SeatMap.class);
         PostOrder po = new PostOrder();
         po.countItems();
         startActivity(intent);
     }
 
     private void openMenuActivity() {
-        Intent intent = new Intent(this,MenuActivity.class);
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
@@ -74,11 +73,11 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void openSeatingActivity() {
-        Intent intent = new Intent(this,SeatingActivity.class);
+        Intent intent = new Intent(this, SeatingActivity.class);
         startActivity(intent);
     }
 
-    class CustomAdapter extends BaseAdapter{
+    class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -97,7 +96,7 @@ public class CartActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.cart_layout,null);
+            view = getLayoutInflater().inflate(R.layout.cart_layout, null);
 
             TextView textView_name = view.findViewById(R.id.textView_name);
             textView_name.setText(DynamicFoodlistActivity.cart.get(i).getName());
