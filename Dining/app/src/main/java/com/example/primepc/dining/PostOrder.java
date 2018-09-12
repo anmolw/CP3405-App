@@ -45,7 +45,7 @@ public class PostOrder {
 
         Gson gson = new Gson();
         json = gson.toJson(restaurant);
-
+        System.out.println(json + "i am from post order");
         HttpPost hp = new HttpPost();
         hp.execute();
     }

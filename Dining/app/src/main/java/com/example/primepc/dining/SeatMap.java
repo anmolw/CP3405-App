@@ -1,5 +1,6 @@
 package com.example.primepc.dining;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,7 +23,12 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,15 +41,16 @@ import java.util.Map;
 
 public class SeatMap extends AppCompatActivity {
 
-    private StringRequest request;
-    public static String token;
+
+    static String json;
+
+    @SuppressLint("UseSparseArrays")
 
     private String TAG = MainActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
 
 
-    public RequestQueue requestQueue;
 
 
     // URL to get contacts JSON
@@ -491,53 +498,25 @@ public class SeatMap extends AppCompatActivity {
         final Intent intent = new Intent(this, OrderReceipt.class);
         intent.putExtra("tablenumber", a);
 
-
-        String URL = "https://dt.anmolw.com/api/reservations";
-        requestQueue = Volley.newRequestQueue(this);
+            JsonObject restaurant = new JsonObject();
 
 
-        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.has("table")) {
+            restaurant.addProperty("table",Integer.parseInt(a));
 
-                        Toast.makeText(getApplicationContext(), "token" + jsonObject.getString("token"), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(SeatMap.this, "Successful login", Toast.LENGTH_LONG).show();
-                        token = jsonObject.getString("token");
-                        System.out.println(token + "yes i am it");
-                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+            Gson gson = new Gson();
+            json = gson.toJson(restaurant);
 
-                    } else {
-                        Toast.makeText(SeatMap.this, "Invalid credentials,Please try again", Toast.LENGTH_LONG).show();
-                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+            System.out.println(json);
+            System.out.println(restaurant);
+
+            HttpSeat hp = new HttpSeat();
+            hp.execute();
+            startActivity(intent);
 
 
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SeatMap.this, "Invalid credentials,Please try again", Toast.LENGTH_LONG).show();
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> hashMap = new HashMap<String, String>();
-                hashMap.put("token", MainActivity.token);
 
 
-                return hashMap;
-            }
-        };
-        requestQueue.add(request);
-        startActivity(intent);
+    }
+    }
 
-    }}
 
