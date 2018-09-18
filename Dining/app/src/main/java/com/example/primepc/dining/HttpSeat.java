@@ -26,13 +26,13 @@ public class HttpSeat extends AsyncTask<Void, Void, Void> {
             URL url = new URL("https://dt.anmolw.com/api/reservations");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestProperty("Authorization", "Token 8fd74020cf61e5e6d3504c3c407be5883f09edca");
-            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             con.setDoInput(true);
             con.setDoOutput(true);
             con.setRequestMethod("POST");
             OutputStream os = new BufferedOutputStream(con.getOutputStream());
             System.out.println("*** Sending Response ***");
-            os.write(SeatMap.json.getBytes());
+            os.write(SeatMap.json.getBytes("UTF-8"));
             os.close();
 
             InputStream is;

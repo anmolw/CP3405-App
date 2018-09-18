@@ -501,7 +501,7 @@ public class SeatMap extends AppCompatActivity {
             JsonObject restaurant = new JsonObject();
 
 
-            restaurant.addProperty("table",Integer.parseInt(a));
+            restaurant.addProperty("table",a);
 
             Gson gson = new Gson();
             json = gson.toJson(restaurant);
