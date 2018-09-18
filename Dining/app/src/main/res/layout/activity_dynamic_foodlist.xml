@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/restaurant"
-        android:layout_width="145dp"
+        android:layout_width="match_parent"
         android:layout_height="41dp"
         android:text="?"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
